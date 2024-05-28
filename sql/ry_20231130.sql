@@ -1,4 +1,24 @@
 -- ----------------------------
+-- 0、涂层信息表
+-- ----------------------------
+drop table if exists coating_data;
+create table coating_data(
+    _id     bigint(20) not null auto_increment comment '数据id',
+    airplane   varchar(50)  default '' comment '飞机编号',
+    coating_location   varchar(50) default '' comment '涂层位置',
+    fill_light_info   varchar(150) default '' comment '补光情况',
+    coating_file_location   varchar(150) default '' comment '文件存储位置',
+    coating_image   varchar(150) default '' comment '蒙皮涂层图像',
+    coating_identify_image   varchar(150) default '' comment '识别结果图像',
+    status      char(1)     default '0' comment '数据状态（0正常 1停用）',
+    create_by   varchar(64) default '' comment '创建者',
+    create_time datetime comment '创建时间',
+    update_by   varchar(64) default '' comment '更新者',
+    update_time datetime comment '更新时间',
+    primary key (_id)
+) engine = innodb auto_increment = 200 comment = '涂层数据表';
+
+-- ----------------------------
 -- 1、部门表
 -- ----------------------------
 drop table if exists sys_dept;
