@@ -1,3 +1,6 @@
+create database data_manager;
+use data_manager;
+
 -- ----------------------------
 -- 0、涂层信息表
 -- ----------------------------
