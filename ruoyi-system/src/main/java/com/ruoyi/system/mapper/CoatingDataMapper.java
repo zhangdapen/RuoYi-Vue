@@ -16,8 +16,22 @@ public interface CoatingDataMapper
     /**
      * 根据条件分页查询数据列表
      * 
-     * @param coatingData 数据信息
      * @return 数据集合信息
      */
-    List<CoatingData> seleselectCoatingDataListctCoatingDataList(CoatingData coatingData);
+    List<CoatingData> selectCoatingDataList();
+
+
+    /**
+     * 新增涂层数据
+     * @param coatingData 涂层数据
+     * @return
+     */
+    int insertCoatingData(CoatingData coatingData);
+
+    /**
+     * 修改涂层数据
+     * @param coatingData
+     * @return
+     */
+    int updateCoatingData(CoatingData coatingData);
 }
