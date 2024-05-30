@@ -34,4 +34,20 @@ public interface CoatingDataMapper
      * @return
      */
     int updateCoatingData(CoatingData coatingData);
+
+
+    /**
+     * 根据id删除涂层数据
+     * @param id
+     * @return
+     */
+    int deleteCoatingDataById(Long id);
+
+    /**
+     * 批量删除涂层数据
+     *
+     * @param ids 涂层数据id列表
+     * @return 结果
+     */
+     int deleteCoatingDataByIds(Long[] ids);
 }

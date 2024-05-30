@@ -9,4 +9,10 @@ public interface ICoatingDataService {
     int insertCoatingData(CoatingData coatingData);
 
     List<CoatingData> getCoatingDataList();
+
+    int updateCoatingData(CoatingData coatingData);
+
+    int deleteCoatingDataById(Long id);
+
+    int deleteCoatingDataByIds(Long[] ids);
 }

@@ -13,7 +13,7 @@ create table coating_data(
     coating_file_location   varchar(150) default '' comment '文件存储位置',
     coating_image   varchar(150) default '' comment '蒙皮涂层图像',
     coating_identify_image   varchar(150) default '' comment '识别结果图像',
-    status      char(1)     default '0' comment '数据状态（0正常 1停用）',
+    status      char(1)     default '1' comment '数据状态（1正常 0停用）',
     create_by   varchar(64) default '' comment '创建者',
     create_time datetime comment '创建时间',
     update_by   varchar(64) default '' comment '更新者',
