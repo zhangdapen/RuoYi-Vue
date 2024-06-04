@@ -106,6 +106,17 @@
   }
 }
 
+.search-header {
+  font-size: 24px;
+  text-align: center;
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  margin-top: 200px;
+}
+
 /** 表单布局 **/
 .form-header {
   font-size: 15px;

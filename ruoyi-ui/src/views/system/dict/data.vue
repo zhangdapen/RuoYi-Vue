@@ -273,6 +273,7 @@ export default {
   },
   created() {
     const dictId = this.$route.params && this.$route.params.dictId;
+    console.log('efg');
     this.getType(dictId);
     this.getTypeList();
   },
