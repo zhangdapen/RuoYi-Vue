@@ -47,6 +47,10 @@
         select * from coating_data where status = 1
     </select>
 
+    <select id="selectById" resultMap="CoatingDataResult">
+        select * from coating_data where status = 1 limit 1
+    </select>
+    
     <update id="updateCoatingData" parameterType="CoatingData">
         update coating_data
         <set>

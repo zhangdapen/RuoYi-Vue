@@ -10,6 +10,9 @@ public interface ICoatingDataService {
 
     List<CoatingData> getCoatingDataList();
 
+    CoatingData getCoatingData(Long id);
+
+
     int updateCoatingData(CoatingData coatingData);
 
     int deleteCoatingDataById(Long id);

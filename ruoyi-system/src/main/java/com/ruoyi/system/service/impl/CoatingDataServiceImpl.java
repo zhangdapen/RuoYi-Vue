@@ -26,6 +26,11 @@ public class CoatingDataServiceImpl implements ICoatingDataService {
     }
 
     @Override
+    public CoatingData getCoatingData(Long id) {
+        return coatingDataMapper.selectById(id);
+    }
+
+    @Override
     public int updateCoatingData(CoatingData coatingData) {
         return coatingDataMapper.updateCoatingData(coatingData);
     }

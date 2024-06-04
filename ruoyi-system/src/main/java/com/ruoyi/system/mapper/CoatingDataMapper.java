@@ -20,6 +20,12 @@ public interface CoatingDataMapper
      */
     List<CoatingData> selectCoatingDataList();
 
+    /**
+     * 根据id查询数据
+     * @return 数据详情
+     */
+    CoatingData selectById(Long id);
+
 
     /**
      * 新增涂层数据

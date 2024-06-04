@@ -55,6 +55,13 @@ public class CoatingDataController extends BaseController {
         return getDataTable(coatingDataList);
     }
 
+    @GetMapping("/data")
+    @Anonymous
+    public CoatingData selectOne() {
+        Long id = Convert.toLong(ServletUtils.getParameter("id"));
+        return coatingDataService.getCoatingData(id);
+    }
+
     @GetMapping("/delete")
     @Anonymous
     public AjaxResult delete() {
