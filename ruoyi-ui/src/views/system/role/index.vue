@@ -1,56 +1,33 @@
 <template>
   <div class="app-container">
-
-    <el-table v-loading="loading" :data="roleList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="角色编号" prop="roleId" width="120" />
-      <el-table-column label="角色名称" prop="roleName" :show-overflow-tooltip="true" width="150" />
-      <el-table-column label="权限字符" prop="roleKey" :show-overflow-tooltip="true" width="150" />
-      <el-table-column label="显示顺序" prop="roleSort" width="100" />
-      <el-table-column label="状态" align="center" width="100">
+    <h4 class="h4 search-header">数据展示</h4>
+    <el-table v-loading="loading" :data="roleList">
+      <el-table-column label="编号" prop="roleId" width="120" />
+      <el-table-column label="拍摄场地" prop="roleName" :show-overflow-tooltip="true" width="150" />
+      <el-table-column label="飞机类型" prop="roleKey" :show-overflow-tooltip="true" width="150" />
+      <el-table-column label="数据拍摄日期" prop="roleSort" width="100" />
+      <el-table-column label="本地存储位置" align="center" width="100">
         <template slot-scope="scope">
-          <el-switch
-            v-model="scope.row.status"
-            active-value="0"
-            inactive-value="1"
-            @change="handleStatusChange(scope.row)"
-          ></el-switch>
+          <img src="@/assets/images/dark.svg" alt="dark">
+<!--          <el-switch-->
+<!--            v-model="scope.row.status"-->
+<!--            active-value="0"-->
+<!--            inactive-value="1"-->
+<!--            @change="handleStatusChange(scope.row)"-->
+<!--          ></el-switch>-->
         </template>
       </el-table-column>
-      <el-table-column label="创建时间" align="center" prop="createTime" width="180">
+      <el-table-column label="光谱图像" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
-        <template slot-scope="scope" v-if="scope.row.roleId !== 1">
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-edit"
-            @click="handleUpdate(scope.row)"
-            v-hasPermi="['system:role:edit']"
-          >修改</el-button>
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-delete"
-            @click="handleDelete(scope.row)"
-            v-hasPermi="['system:role:remove']"
-          >删除</el-button>
-          <el-dropdown size="mini" @command="(command) => handleCommand(command, scope.row)" v-hasPermi="['system:role:edit']">
-            <el-button size="mini" type="text" icon="el-icon-d-arrow-right">更多</el-button>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="handleDataScope" icon="el-icon-circle-check"
-                v-hasPermi="['system:role:edit']">数据权限</el-dropdown-item>
-              <el-dropdown-item command="handleAuthUser" icon="el-icon-user"
-                v-hasPermi="['system:role:edit']">分配用户</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+      <el-table-column label="检测图" align="center" prop="createTime" width="180">
+        <template slot-scope="scope">
+          <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
     </el-table>
-
   </div>
 </template>
 
@@ -152,12 +129,13 @@ export default {
   methods: {
     /** 查询角色列表 */
     getList(id) {
-      console.log(id);
       this.loading = true;
       listRole(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-        console.log('aaa');
+          console.log('aaa');
           this.roleList = response.rows;
           this.total = response.total;
+          console.log(this.roleList);
+          console.log(this.total);
           this.loading = false;
         }
       );
