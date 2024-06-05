@@ -1,3 +1,4 @@
+
 <template>
   <div class="app-container">
     <el-table v-loading="loading" :data="airplaneList">
@@ -5,6 +6,11 @@
       <el-table-column label="数据采集时间" align="center" prop="createTime" />
       <el-table-column label="飞机编号" align="center" prop="airplane" />
       <el-table-column label="原始数据本地存储位置" align="center" prop="coatingFileLocation" />
+      <el-table-column label="图片" prop="coatingImage">
+        <template slot-scope="scope">
+          <img :src="scope.row.coatingImage" alt="" style="width:50px; height:50px;">
+        </template>
+      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
