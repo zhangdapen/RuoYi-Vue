@@ -4,6 +4,7 @@ import com.ruoyi.common.annotation.Anonymous;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.entity.UploadEntity;
+import com.ruoyi.system.domain.vo.UploadEntityVO;
 import com.ruoyi.system.service.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +32,7 @@ public class UploadController extends BaseController {
     @Anonymous
     public AjaxResult upload(@RequestParam("file") MultipartFile file) {
         try {
-            UploadEntity upload = uploadService.upload(file);
+            UploadEntityVO upload = uploadService.upload(file);
             return success(upload);
         } catch (Exception e) {
             return success("上传失败，请重试");

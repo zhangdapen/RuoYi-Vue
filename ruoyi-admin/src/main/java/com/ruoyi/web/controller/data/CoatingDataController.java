@@ -72,6 +72,14 @@ public class CoatingDataController extends BaseController {
         return coatingDataService.getCoatingData(id);
     }
 
+    @GetMapping("/search")
+    @Anonymous
+    public TableDataInfo search() {
+        String airplane = Convert.toStr(ServletUtils.getParameter("airplane"));
+        List<CoatingData> coatingDataByAirPlane = coatingDataService.getCoatingDataByAirPlane(airplane);
+        return getDataTable(coatingDataByAirPlane);
+    }
+
     @GetMapping("/delete")
     @Anonymous
     public AjaxResult delete() {

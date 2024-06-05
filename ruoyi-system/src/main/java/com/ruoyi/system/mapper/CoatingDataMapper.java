@@ -21,6 +21,13 @@ public interface CoatingDataMapper
     List<CoatingData> selectCoatingDataList();
 
     /**
+     * 根据条件分页查询数据列表
+     *
+     * @return 数据集合信息
+     */
+    List<CoatingData> selectCoatingDataByAirPlane(String airplane);
+
+    /**
      * 根据id查询数据
      * @return 数据详情
      */

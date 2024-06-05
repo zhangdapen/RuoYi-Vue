@@ -12,6 +12,8 @@ public interface ICoatingDataService {
 
     List<CoatingData> getCoatingDataList();
 
+    List<CoatingData> getCoatingDataByAirPlane(String airplane);
+
     CoatingData getCoatingData(Long id);
 
 

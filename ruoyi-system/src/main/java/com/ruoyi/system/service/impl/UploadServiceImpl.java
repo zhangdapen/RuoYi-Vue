@@ -3,6 +3,7 @@ package com.ruoyi.system.service.impl;
 import com.ruoyi.common.config.MinioConfig;
 import com.ruoyi.common.utils.minio.MinioUtils;
 import com.ruoyi.common.core.domain.entity.UploadEntity;
+import com.ruoyi.system.domain.vo.UploadEntityVO;
 import com.ruoyi.system.service.UploadService;
 import io.minio.ObjectWriteResponse;
 import io.minio.errors.ErrorResponseException;
@@ -39,7 +40,7 @@ public class UploadServiceImpl implements UploadService {
     }
 
     @Override
-    public UploadEntity upload(MultipartFile file) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException, InvalidBucketNameException, InvalidExpiresRangeException {
+    public UploadEntityVO upload(MultipartFile file) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException, InvalidBucketNameException, InvalidExpiresRangeException {
         //文件名
         String fileName = file.getOriginalFilename();
         String newFileName = System.currentTimeMillis() + "." + StringUtils.substringAfterLast(fileName, ".");
@@ -51,6 +52,13 @@ public class UploadServiceImpl implements UploadService {
                 newFileName,
                 contentType
         );
-        return new UploadEntity(objectWriteResponse.bucket(), newFileName);
+        String bucket = objectWriteResponse.bucket();
+        String key = newFileName;
+        UploadEntityVO uploadEntityVO = new UploadEntityVO();
+        uploadEntityVO.setBucket(bucket);
+        uploadEntityVO.setFileName(fileName);
+        uploadEntityVO.setKey(newFileName);
+        uploadEntityVO.setUrl(minioUtils.getPresignedObjectUrl(bucket, key));
+        return uploadEntityVO;
     }
 }

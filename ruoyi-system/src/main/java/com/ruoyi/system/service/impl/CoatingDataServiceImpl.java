@@ -39,6 +39,13 @@ public class CoatingDataServiceImpl implements ICoatingDataService {
         return coatingData;
     }
 
+    @Override
+    public List<CoatingData> getCoatingDataByAirPlane(String airplane) {
+        List<CoatingData> coatingData = coatingDataMapper.selectCoatingDataByAirPlane(airplane);
+        coatingData.forEach(this::generateImageUrl);
+        return coatingData;
+    }
+
     private CoatingData generateImageUrl(CoatingData data) {
         String coatingImage = data.getCoatingImage();
         String coatingIdentifyImage = data.getCoatingIdentifyImage();
