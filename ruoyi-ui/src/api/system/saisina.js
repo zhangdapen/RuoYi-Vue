@@ -35,6 +35,14 @@ export function getPlanePost(query) {
   })
 }
 
+export function searchPlanePost(query) {
+  return request({
+    url: '/search',
+    method: 'get',
+    params: query
+  })
+}
+
 // 更新数据
 export function updatePlaneData(data) {
   return request({

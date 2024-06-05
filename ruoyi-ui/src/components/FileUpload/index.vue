@@ -5,6 +5,7 @@
       :action="uploadFileUrl"
       :before-upload="handleBeforeUpload"
       :file-list="fileList"
+      :bucket-list="bucketList"
       :limit="limit"
       :on-error="handleUploadError"
       :on-exceed="handleExceed"
@@ -60,7 +61,7 @@ export default {
     // 文件类型, 例如['png', 'jpg', 'jpeg']
     fileType: {
       type: Array,
-      default: () => ["doc", "xls", "ppt", "txt", "pdf"],
+      default: () => ['png', 'jpg', 'jpeg'],
     },
     // 是否显示提示
     isShowTip: {
@@ -73,10 +74,11 @@ export default {
       number: 0,
       uploadList: [],
       baseUrl: process.env.VUE_APP_BASE_API,
-      uploadFileUrl: process.env.VUE_APP_BASE_API + "/common/upload", // 上传文件服务器地址
+      uploadFileUrl: process.env.VUE_APP_BASE_API + "/upload", // 上传文件服务器地址
       headers: {
         Authorization: "Bearer " + getToken(),
       },
+      bucketList: [],
       fileList: [],
     };
   },
@@ -97,6 +99,7 @@ export default {
           });
         } else {
           this.fileList = [];
+          this.bucketList = [];
           return [];
         }
       },
@@ -147,7 +150,10 @@ export default {
     // 上传成功回调
     handleUploadSuccess(res, file) {
       if (res.code === 200) {
-        this.uploadList.push({ name: res.fileName, url: res.fileName });
+        this.uploadList.push({ name: res.data.fileName, url: res.data.fileName });
+        this.bucketList.push({bucket: res.data.bucket, key: res.data.key});
+        console.log('aaa');
+        console.log(this.bucketList);
         this.uploadedSuccessfully();
       } else {
         this.number--;
@@ -160,6 +166,7 @@ export default {
     // 删除文件
     handleDelete(index) {
       this.fileList.splice(index, 1);
+      this.bucketList.splice(index, 1);
       this.$emit("input", this.listToString(this.fileList));
     },
     // 上传结束处理

@@ -2,31 +2,15 @@
   <div class="app-container">
     <h4 class="h4 search-header">数据展示</h4>
     <el-table v-loading="loading" :data="roleList">
-      <el-table-column label="编号" prop="roleId" width="120" />
-      <el-table-column label="拍摄场地" prop="roleName" :show-overflow-tooltip="true" width="150" />
-      <el-table-column label="飞机类型" prop="roleKey" :show-overflow-tooltip="true" width="150" />
-      <el-table-column label="数据拍摄日期" prop="roleSort" width="100" />
-      <el-table-column label="本地存储位置" align="center" width="100">
-        <template slot-scope="scope">
-          <img src="@/assets/images/dark.svg" alt="dark">
-<!--          <el-switch-->
-<!--            v-model="scope.row.status"-->
-<!--            active-value="0"-->
-<!--            inactive-value="1"-->
-<!--            @change="handleStatusChange(scope.row)"-->
-<!--          ></el-switch>-->
-        </template>
-      </el-table-column>
-      <el-table-column label="光谱图像" align="center" prop="createTime" width="180">
+      <el-table-column label="编号" prop="airplane" width="120" />
+      <el-table-column label="拍摄场地" prop="coatingFileLocation" :show-overflow-tooltip="true" width="150" />
+      <el-table-column label="创建时间" prop="createTime" width="100" >
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="检测图" align="center" prop="createTime" width="180">
-        <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.createTime) }}</span>
-        </template>
-      </el-table-column>
+      <el-table-column label="本地存储位置" align="center" prop="coatingLocation" width="100" />
+      <el-table-column label="光谱图像" align="center" prop="fillLightInfo" width="180" />
     </el-table>
   </div>
 </template>
@@ -34,6 +18,7 @@
 <script>
 import { listRole, getRole, delRole, addRole, updateRole, dataScope, changeRoleStatus, deptTreeSelect } from "@/api/system/role";
 import { treeselect as menuTreeselect, roleMenuTreeselect } from "@/api/system/menu";
+import { searchPlanePost } from "@/api/system/saisina";
 
 export default {
   name: "Role",
@@ -123,19 +108,19 @@ export default {
   },
   created() {
     const id = this.$route.query.id;
-    console.log('aaa');
+    console.log('eee');
+    console.log(this.$route.query);
     this.getList(id);
   },
   methods: {
     /** 查询角色列表 */
     getList(id) {
       this.loading = true;
-      listRole(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-          console.log('aaa');
+      searchPlanePost({
+        airplane: id
+      }).then(response => {
           this.roleList = response.rows;
           this.total = response.total;
-          console.log(this.roleList);
-          console.log(this.total);
           this.loading = false;
         }
       );

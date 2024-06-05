@@ -204,10 +204,6 @@ export default {
     },
     /** 搜索按钮操作 */
     handleQuery() {
-      console.log('aaa');
-      console.log(this.queryParams.roleNumber);
-      var url = '/system/role/'+this.queryParams.roleNumber;
-      console.log(url);
       this.$router.push({ path: '/system/role/', query: { id: this.queryParams.roleNumber } });
     },
     /** 重置按钮操作 */

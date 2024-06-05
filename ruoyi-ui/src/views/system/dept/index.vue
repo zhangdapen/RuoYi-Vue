@@ -31,9 +31,9 @@
       </el-row>
       <el-row>
         <el-col :span="24">
-<!--          <el-form-item label="文件" prop="file">-->
-<!--            <FileUpload />-->
-<!--          </el-form-item>-->
+          <el-form-item label="文件" prop="file">
+            <FileUpload ref="formUpload"/>
+          </el-form-item>
         </el-col>
       </el-row>
     </el-form>
@@ -138,8 +138,16 @@ export default {
     },
     /** 提交按钮 */
     submitForm: function() {
+      const bucketList = this.$refs["formUpload"].bucketList || [];
+      console.log(bucketList);
+      const bucketObj = bucketList[0] || {
+        bucket: '',
+        key: ''
+      }
+      console.log();
       this.$refs["form"].validate(valid => {
         if (valid) {
+          this.form.coatingImage =  bucketObj;
           console.log(this.form);
           addPlaneData(this.form).then(response => {
             this.$alert("<div style='overflow: auto;overflow-x: hidden;max-height: 70vh;padding: 10px 20px 0;'>" + '上传成功' + "</div>", { dangerouslyUseHTMLString: true })
