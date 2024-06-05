@@ -1,8 +1,10 @@
 package com.ruoyi.web.controller.data;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ruoyi.common.annotation.Anonymous;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.dto.CoatingDataDTO;
 import com.ruoyi.common.core.domain.entity.CoatingData;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.page.TableDataInfo;
@@ -29,22 +31,30 @@ public class CoatingDataController extends BaseController {
      */
     @PostMapping("/create")
     @Anonymous
-    public AjaxResult create(@RequestBody CoatingData coatingData) {
-        int i = coatingDataService.insertCoatingData(coatingData);
-        if (i > 0) {
-            return success("添加成功");
+    public AjaxResult create(@RequestBody CoatingDataDTO coatingData) {
+        try {
+            int i = coatingDataService.insertCoatingData(coatingData);
+            if (i > 0) {
+                return success("添加成功");
+            }
+            return error("添加失败，请重新尝试");
+        } catch (JsonProcessingException e) {
+            return error("添加失败，请重新尝试");
         }
-        return error("添加失败，请重新尝试");
     }
 
     @PostMapping("/update")
     @Anonymous
-    public AjaxResult update(@RequestBody CoatingData coatingData) {
-        int i = coatingDataService.updateCoatingData(coatingData);
-        if (i > 0) {
-            return success("更新成功");
+    public AjaxResult update(@RequestBody CoatingDataDTO coatingData) {
+        try {
+            int i = coatingDataService.updateCoatingData(coatingData);
+            if (i > 0) {
+                return success("更新成功");
+            }
+            return error("更新失败，请重新尝试");
+        } catch (JsonProcessingException e) {
+            return error("更新失败，请重新尝试");
         }
-        return error("更新失败，请重新尝试");
     }
 
     @GetMapping("/list")
