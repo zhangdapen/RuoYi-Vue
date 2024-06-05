@@ -6,6 +6,16 @@ public class UploadEntityVO extends UploadEntity {
 
     private String url;
 
+    private String fileName;
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
     public String getUrl() {
         return url;
     }

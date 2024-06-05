@@ -19,8 +19,6 @@ public class UploadEntity {
 
     private String key;
 
-    private String fileName;
-
     public String getBucket() {
         return bucket;
     }
@@ -35,13 +33,5 @@ public class UploadEntity {
 
     public void setKey(String key) {
         this.key = key;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
     }
 }

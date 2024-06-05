@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ruoyi.common.core.domain.dto.CoatingDataDTO;
 import com.ruoyi.common.core.domain.entity.CoatingData;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.minio.MinioUtils;
 import com.ruoyi.common.core.domain.entity.UploadEntity;
 import com.ruoyi.system.mapper.CoatingDataMapper;
@@ -51,10 +52,15 @@ public class CoatingDataServiceImpl implements ICoatingDataService {
         String coatingIdentifyImage = data.getCoatingIdentifyImage();
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            UploadEntity coatingImageUploadEntity = objectMapper.readValue(coatingImage, UploadEntity.class);
-            UploadEntity coatingIdentifyImageUploadEntity = objectMapper.readValue(coatingIdentifyImage, UploadEntity.class);
-            data.setCoatingImage(minioUtils.getPresignedObjectUrl(coatingImageUploadEntity.getBucket(), coatingImageUploadEntity.getKey()));
-            data.setCoatingIdentifyImage(minioUtils.getPresignedObjectUrl(coatingIdentifyImageUploadEntity.getBucket(), coatingIdentifyImageUploadEntity.getKey()));
+            if (!StringUtils.isEmpty(coatingImage)) {
+                UploadEntity coatingImageUploadEntity = objectMapper.readValue(coatingImage, UploadEntity.class);
+                data.setCoatingImage(minioUtils.getPresignedObjectUrl(coatingImageUploadEntity.getBucket(), coatingImageUploadEntity.getKey()));
+
+            }
+            if (!StringUtils.isEmpty(coatingIdentifyImage)) {
+                UploadEntity coatingIdentifyImageUploadEntity = objectMapper.readValue(coatingIdentifyImage, UploadEntity.class);
+                data.setCoatingIdentifyImage(minioUtils.getPresignedObjectUrl(coatingIdentifyImageUploadEntity.getBucket(), coatingIdentifyImageUploadEntity.getKey()));
+            }
         } catch (Exception e) {
             log.error("解析图片出错", e);
         }
