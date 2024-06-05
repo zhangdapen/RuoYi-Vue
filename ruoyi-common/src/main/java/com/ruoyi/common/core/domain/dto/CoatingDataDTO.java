@@ -16,6 +16,8 @@ public class CoatingDataDTO extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
+    private Long id;
+
     /** 飞机编号 */
     private String airplane;
 
@@ -82,6 +84,14 @@ public class CoatingDataDTO extends BaseEntity
         this.coatingIdentifyImage = coatingIdentifyImage;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public CoatingData toCoatingData() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         CoatingData data = new CoatingData();
@@ -99,6 +109,7 @@ public class CoatingDataDTO extends BaseEntity
         data.setUpdateBy(getUpdateBy());
         data.setUpdateTime(getUpdateTime());
         data.setCreateTime(getCreateTime());
+        data.setId(getId());
         return data;
     }
 }
